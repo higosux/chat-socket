@@ -16,7 +16,8 @@ socket.on('connect', function() {
     console.log('Conectado al servidor');
 
     socket.emit('enterChat', user, function(resp) {
-        console.log('Usuarios conectado: ', resp);
+        //console.log('Usuarios conectado: ', resp);
+        usersRender(resp);
     })
 });
 
@@ -32,14 +33,17 @@ socket.on('disconnect', function() {
 // Escuchar información
 socket.on('createMessage', function(message) {
 
-    console.log('Servidor:', message);
+    // console.log('Servidor:', message);
+    messagesRender(message, false);
+    scrollBottom();
 
 });
 
 //escuchar cambios de usuarios cuando un usaurio entra y sale de la sala
 socket.on('listPerson', function(persons) {
 
-    console.log(persons);
+
+    usersRender(persons);
 
 });
 
